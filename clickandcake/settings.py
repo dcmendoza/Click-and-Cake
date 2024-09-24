@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cake.apps.CakeConfig',
+    'account.apps.AccountConfig',
+    'payment.apps.PaymentConfig',
+    'reviews.apps.ReviewsConfig',
+    'order.apps.OrderConfig',
 ]
 
 MIDDLEWARE = [
