@@ -1,8 +1,9 @@
 from datetime import datetime
 from django.shortcuts import render
+from django.core.cache import cache
 
 # Create your views here.
-def home(request):
+def home_view(request):
     date = datetime.now()
     greet = "Hello"
     user = request.user
@@ -37,4 +38,8 @@ def home(request):
     day = date.weekday()
     quote = quotes.get(day, "Enjoy your day with a slice of cake!")  # Default por si acaso
 
-    return render(request, "home.html", {"greet": greet, "quote": quote})
+    visit_count = cache.get('visit_count', 0)  # Obtener el valor actual del caché
+    visit_count += 1  # Incrementar el contador
+    cache.set('visit_count', visit_count, timeout=None)
+
+    return render(request, "home.html", {"greet": greet, "quote": quote, "visit_count": visit_count})

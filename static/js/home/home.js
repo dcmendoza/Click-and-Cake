@@ -46,3 +46,16 @@ window.addEventListener('scroll', () => {
         header.classList.remove('shrink');
     }
 })
+
+window.onscroll = function() {
+    var scrollBtn = document.getElementById("scrollToTop");
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        scrollBtn.style.display = "block";
+    } else {
+        scrollBtn.style.display = "none";
+    }
+};
+
+document.getElementById('scrollToTop').addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
