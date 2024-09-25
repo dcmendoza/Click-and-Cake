@@ -1,44 +1,225 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Home</title>
-    <style>
-        /* El cuerpo debe ocupar al menos el 100% de la altura de la ventana */
-        html, body {
-            height: 100%;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-        }
+{% extends "base.html" %}
 
-        /* El contenido principal se expande para ocupar el espacio disponible */
-        main {
-            flex: 1;
-        }
+{% load static %} 
 
-        /* Estilos para el pie de página */
-        footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #f3a3d2;
-            padding: 10px;
-            text-align: center;
-        }
-    </style>
-</head>
+{% block title %}Home{% endblock title %}
 
-<body>
-    <h1>{{greet}}</h1>
+{% block styles %}
+<link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+<link rel="stylesheet" href="{% static 'css/home/home.css' %}"/>
+{% endblock styles %} 
 
-    <footer>
-        <hr>
-        <h1>{{quote}}</h1>
-        <p>&copy; 2024 Click and Cake. Made by Danna M and Paulina C.</p>
-    </footer>
-    
-</body>
+{% block content %}
+<!-- HERO SLIDER -->
+<div class="hero">
+	<div class="container">
+		<div class="swiper">
+			<div class="swiper-wrapper">
+				<!-- slide -->
+				<div class="swiper-slide">
+					<div class="hero__slide">
+						<div class="hero__slide__txt">Cheese</div>
+						<div class="hero__slide__img">
+							<img src="{% static 'images/home/cupcake_(6).png' %}" alt="" />
+							<button class="btn btn-right" data-speed="-5">$4.5</button>
+							<button class="btn btn-left" data-speed="-5">Add to bag</button>
+						</div>
+					</div>
+				</div>
+				<!-- end slide -->
+				<!-- slide -->
+				<div class="swiper-slide">
+					<div class="hero__slide">
+						<div class="hero__slide__txt">Blueberry</div>
+						<div class="hero__slide__img">
+							<img src="{% static 'images/home/cupcake_(1).png' %}" alt="" />
+							<button class="btn btn-right" data-speed="-5">$4.5</button>
+							<button class="btn btn-left" data-speed="-5">Add to bag</button>
+						</div>
+					</div>
+				</div>
+				<!-- end slide -->
+				<!-- slide -->
+				<div class="swiper-slide">
+					<div class="hero__slide">
+						<div class="hero__slide__txt">Chocolate</div>
+						<div class="hero__slide__img">
+							<img src="{% static 'images/home/cupcake_(3).png' %}" alt="" />
+							<button class="btn btn-right" data-speed="-5">$4.5</button>
+							<button class="btn btn-left" data-speed="-5">Add to bag</button>
+						</div>
+					</div>
+				</div>
+				<!-- end slide -->
+				<!-- slide -->
+				<div class="swiper-slide">
+					<div class="hero__slide">
+						<div class="hero__slide__txt">Strawberry</div>
+						<div class="hero__slide__img">
+							<img src="{% static 'images/home/cupcake_(2).png' %}" alt="" />
+							<button class="btn btn-right" data-speed="-5">$4.5</button>
+							<button class="btn btn-left" data-speed="-5">Add to bag</button>
+						</div>
+					</div>
+				</div>
+				<!-- end slide -->
+				<!-- slide -->
+				<div class="swiper-slide">
+					<div class="hero__slide">
+						<div class="hero__slide__txt">Chocolate</div>
+						<div class="hero__slide__img">
+							<img src="{% static 'images/home/cupcake_(5).png' %}" alt="" />
+							<button class="btn btn-right" data-speed="-5">$4.5</button>
+							<button class="btn btn-left" data-speed="-5">Add to bag</button>
+						</div>
+					</div>
+				</div>
+				<!-- end slide -->
+			</div>
+			<div class="swiper-pagination"></div>
+		</div>
+	</div>
+</div>
+<!-- END HERO SLIDER -->
+<h1>{{greet}} {{quote}}</h1>
+<!-- HOT SELLING SECTION -->
+<div class="section">
+	<div class="container">
+		<div class="section__header">
+			Hot selling recipe
+		</div>
+		<div class="section__content">
+			<div class="product-grid">
+				<!-- single product -->
+				<div class="product-card">
+					<div class="product-card__img">
+						<img src="{% static 'images/home/cupcake_(1).png' %}" alt="">
+						<div class="btn-wraper">
+							<button class="btn btn-small">Add to bag</button>
+						</div>
+					</div>
+					<div class="product-card__price">$5.65</div>
+					<div class="product-card__name">Blueberry cake</div>
+				</div>
+				<!-- end single product -->
+				<!-- single product -->
+				<div class="product-card">
+					<div class="product-card__img">
+						<img src="{% static 'images/home/cupcake_(2).png' %}" alt="">
+						<div class="btn-wraper">
+							<button class="btn btn-small">Add to bag</button>
+						</div>
+					</div>
+					<div class="product-card__price">$5.65</div>
+					<div class="product-card__name">Strawberry cake</div>
+				</div>
+				<!-- end single product -->
+				<!-- single product -->
+				<div class="product-card">
+					<div class="product-card__img">
+						<img src="{% static 'images/home/cupcake_(3).png' %}" alt="">
+						<div class="btn-wraper">
+							<button class="btn btn-small">Add to bag</button>
+						</div>
+					</div>
+					<div class="product-card__price">$5.65</div>
+					<div class="product-card__name">Chocolate cake</div>
+				</div>
+				<!-- end single product -->
+				<!-- single product -->
+				<div class="product-card">
+					<div class="product-card__img">
+						<img src="{% static 'images/home/cupcake_(5).png' %}" alt="">
+						<div class="btn-wraper">
+							<button class="btn btn-small">Add to bag</button>
+						</div>
+					</div>
+					<div class="product-card__price">$5.65</div>
+					<div class="product-card__name">Caramel cake</div>
+				</div>
+				<!-- end single product -->
+				<!-- single product -->
+				<div class="product-card">
+					<div class="product-card__img">
+						<img src="{% static 'images/home/cupcake_(6).png' %}" alt="">
+						<div class="btn-wraper">
+							<button class="btn btn-small">Add to bag</button>
+						</div>
+					</div>
+					<div class="product-card__price">$5.65</div>
+					<div class="product-card__name">Cheese cake</div>
+				</div>
+				<!-- end single product -->
+				<!-- single product -->
+				<div class="product-card">
+					<div class="product-card__img">
+						<img src="{% static 'images/home/cupcake_(7).png' %}" alt="">
+						<div class="btn-wraper">
+							<button class="btn btn-small">Add to bag</button>
+						</div>
+					</div>
+					<div class="product-card__price">$5.65</div>
+					<div class="product-card__name">Chocolateake</div>
+				</div>
+				<!-- end single product -->
+				<!-- single product -->
+				<div class="product-card">
+					<div class="product-card__img">
+						<img src="{% static 'images/home/cupcake_(11).png' %}" alt="">
+						<div class="btn-wraper">
+							<button class="btn btn-small">Add to bag</button>
+						</div>
+					</div>
+					<div class="product-card__price">$5.65</div>
+					<div class="product-card__name">Milk cake</div>
+				</div>
+				<!-- end single product -->
+				<!-- single product -->
+				<div class="product-card">
+					<div class="product-card__img">
+						<img src="{% static 'images/home/cupcake_(9).png' %}" alt="">
+						<div class="btn-wraper">
+							<button class="btn btn-small">Add to bag</button>
+						</div>
+					</div>
+					<div class="product-card__price">$5.65</div>
+					<div class="product-card__name">Chocolate cake</div>
+				</div>
+				<!-- end single product -->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END HOT SELLING SECTION -->
 
+<!-- ABOUT SECTION -->
+<div class="section">
+	<div class="container">
+		<div class="about">
+			<div class="about__img">
+				<img src="{% static 'images/home/cupcake_(8).png' %}" alt="">
+			</div>
+			<div class="about__info">
+				<div class="section__header">Welcome</div>
+				<h2 class="about__info__title">Click & Cake <span class="txt-main">Bakery</span></h2>
+				<p class="about__info__description">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+					dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+					ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+					nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+					anim id est laborum
+				</p>
+				<div class="about__info__btn">
+					<button class="btn btn-left">Read more</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END ABOUT SECTION -->
+{% endblock content %}
 
-</html>
+{% block scripts %}
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+<script src="{% static 'js/home/home.js' %}"></script>
+{% endblock scripts %}

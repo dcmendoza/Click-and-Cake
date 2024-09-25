@@ -31,7 +31,7 @@ def register_view(request):
             if user is not None:
                 login(request, user)
                 # Redirect to home after successful registration
-                return HttpResponse("Successful")
+                return redirect('home')
             else:
                 messages.error(request, 'Authentication failed after registration.')
         else:
@@ -51,7 +51,7 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)  # Log the user in
-                return HttpResponse("Successful")  # Redirect to home after login
+                return redirect('home')  # Redirect to home after login
             else:
                 messages.error(request, "Invalid username or password.")
         else:
