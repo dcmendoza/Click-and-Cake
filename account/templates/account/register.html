@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Register{% endblock title %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/account/register.css' %}"/>
+{% endblock styles %}
+
+{% block content %}
+<div class="hero-section">
+	<div class="left-image">
+		<img src="{% static 'images/account/MainLoginImg.png' %}" alt="Background Bear Image">
+	</div>
+
+	<div class="form">
+		<h6>
+			<a href="{% url 'register' %}">
+				<img src="{% static 'images/CYCLogo.png' %}" alt="Logo" class="logo">
+			</a>
+		</h6>
+		<h2>Register</h2>
+
+		<form method="POST">
+			{% csrf_token %}
+			
+			{{ form.as_p }}
+
+			<label for="phone">Phone</label>
+			<input type="tel" name="phone" id="phone" placeholder="Your Phone Number" required>
+
+			<input type="submit" value="Register" class="submit">
+		</form>
+
+		<h5>or continue with</h5>
+
+		<div class="icon-container">
+			<div class="icon">
+				<img src="{% static 'images/account/google.png' %}" alt=""/>
+			</div>
+			<div class="icon">
+				<img src="{% static 'images/account/github.png' %}" alt=""/>
+			</div>
+			<div class="icon">
+				<img src="{% static 'images/account/fb.png' %}" alt=""/>
+			</div>
+		</div>
+
+		<h3>Already have an account?
+			<span>
+				<a href="{% url 'login' %}" class="login-link">Login Now!</a>
+			</span>
+		</h3>
+	</div>
+
+	<div class="main-img">
+			<img src="{% static 'images/account/MainRegisterImg.png' %}" alt="Main Image">
+	</div>
+</div>
+{% endblock content %}

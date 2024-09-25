@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<!-- HTML -->
+<html lang="en">
+
+	<!-- Head -->
+	<head>
+		<!-- Meta  -->
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- Título -->
+		<title>Click & Cake - {% block title %}{% endblock %}</title>
+		<!-- Favicon -->
+		<link rel="icon" href="{% static 'images/CYCFavicon.ico' %}">
+		<!-- Fonts -->
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+		<!-- Estilos -->
+		{% block styles %} {% endblock %}
+		<link rel="stylesheet" href="{% static 'css/main.css' %}" />
+	</head>
+	<!-- End head -->
+
+	<!-- Body -->
+	<body>
+		<!-- Header -->
+		<header>
+			<!-- Navbar -->
+			<nav>
+				
+			</nav>
+		</header>
+
+		<!-- Content -->
+			{% block content %}
+				{% if messages %}
+					<ul class="messages">
+					{% for message in messages %}
+						<li class="{% if message.tags %}{{ message.tags }}{% endif %}">
+							{{ message }}
+						</li>
+					{% endfor %}
+					</ul>
+				{% endif %}
+			<!-- El contenido de cada plantilla hija irá aquí -->
+			{% endblock %}
+		
+		<!-- Footer -->
+		<footer>
+			<p>&copy; 2024 Click & Cake</p>
+		</footer>
+		
+	</body>
+	<!-- End body -->
+</html>
