@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home</title>
+    <style>
+        /* El cuerpo debe ocupar al menos el 100% de la altura de la ventana */
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* El contenido principal se expande para ocupar el espacio disponible */
+        main {
+            flex: 1;
+        }
+
+        /* Estilos para el pie de página */
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f3a3d2;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>{{greet}}</h1>
+
+    <footer>
+        <hr>
+        <h1>{{quote}}</h1>
+        <p>&copy; 2024 Click and Cake. Made by Danna M and Paulina C.</p>
+    </footer>
+    
+</body>
+
+
+</html>
