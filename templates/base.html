@@ -15,8 +15,10 @@
 		<!-- Fonts -->
 		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 		<!-- Estilos -->
-		{% block styles %} {% endblock %}
-		<link rel="stylesheet" href="{% static 'css/main.css' %}" />
+		{% block styles %}
+		<link rel="stylesheet" href="{% static 'css/home/home.css' %}"/>
+		{% endblock %}
+		
 	</head>
 	<!-- End head -->
 
@@ -24,10 +26,31 @@
 	<body>
 		<!-- Header -->
 		<header>
-			<!-- Navbar -->
-			<nav>
-				
-			</nav>
+			<div class="header-inner container">
+				<a href="{% url 'home' %}" class="logo">Click&Cake</a>
+				<div class="mobile-toggle">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);">
+								<path d="M4 6h16v2H4zm4 5h12v2H8zm5 5h7v2h-7z"></path>
+						</svg>
+				</div>
+				<ul class="nav">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="#">Menu</a></li>
+					<li><a href="#">About</a></li>
+					<li><a href="#">Order</a></li>
+					{% if user.is_authenticated %}
+						{% if user.is_staff %}
+							<li><a href="{% url 'admin:index' %}">Admin</a></li>
+						{% else %}
+							<li><a href="#">Account</a></li>
+						{% endif %}
+						<li><a href="{% url 'logout' %}">Logout</a></li>
+					{% else %}
+						<li><a href="{% url 'login' %}">Log In</a></li>
+						<li><a href="{% url 'register' %}">Sign Up</a></li>
+					{% endif %}
+				</ul>
+			</div>
 		</header>
 
 		<!-- Content -->
@@ -42,13 +65,52 @@
 					</ul>
 				{% endif %}
 			<!-- El contenido de cada plantilla hija irá aquí -->
-			{% endblock %}
+			{% endblock content %}
 		
 		<!-- Footer -->
 		<footer>
-			<p>&copy; 2024 Click & Cake</p>
+			<div class="section section__footer">
+        <div class="container">
+            <div class="footer">
+                <div class="footer__img">
+                    <img src="{% static 'images/home/cupcake_(1).jpg' %}" alt="">
+                </div>
+                <div class="footer__menus">
+                    <ul class="footer__menus__col">
+                        <h3>Help & Information</h3>
+                        <li><a href="#">About us</a></li>
+                        <li><a href="#">Privacy policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Products return</a></li>
+                    </ul>
+                    <ul class="footer__menus__col">
+                        <h3>About Us</h3>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Accessories</a></li>
+                        <li><a href="#">Term of use</a></li>
+                    </ul>
+                    <ul class="footer__menus__col">
+                        <h3>Categories</h3>
+                        <li><a href="#">Cakes</a></li>
+                        <li><a href="#">Cookies</a></li>
+                    </ul>
+                    <div class="company">Click & Cake <span class="txt-main">Bakery</div>
+                    <img src="{% static 'images/home/cupcake_(5).png' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
 		</footer>
+
+		<!-- Mobile Overlay -->
+		<div class="mobile-overlay"></div>
 		
+		<!-- Scripts -->
+		{% block scripts %}
+		<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+		<script src="{% static 'js/home/home.js' %}"></script>
+		{% endblock scripts %}
+
 	</body>
 	<!-- End body -->
 </html>
