@@ -1,5 +1,5 @@
 from django.db import models
-from account.models import Account
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Cake(models.Model):
@@ -68,10 +68,10 @@ class Review(models.Model):
     """
 
     cake = models.ForeignKey(Cake, on_delete=models.CASCADE, related_name='reviews')  # Relación con Cake
-    user = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='reviews')  # Relación con User
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews', null=True, blank=True)  # Relación con User
     comment = models.TextField()  # Comentario de la reseña
     rating = models.FloatField()  # Puntuación de la reseña (de 0 a 5)
     date = models.DateTimeField(auto_now_add=True)  # Fecha de la reseña (se asigna automáticamente cuando se crea)
 
     def __str__(self):
-        return f'Review by {self.user.user.username} for {self.cake.name} - Rating: {self.rating}'
+        return f'Review by {self.user.username} for {self.cake.name} - Rating: {self.rating}'

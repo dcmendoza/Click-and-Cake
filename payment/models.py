@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.validators import MinLengthValidator, MaxValueValidator, MinValueValidator
-from account.models import Account
+from django.contrib.auth.models import User
 from order.models import Order
 
 # Create your models here.
@@ -14,7 +14,7 @@ class Card(models.Model):
         ('credit', 'Crédito'),
     ]
 
-    account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='cards')
+    account = models.ForeignKey(User, on_delete=models.CASCADE, related_name='cards', blank=True, null=True)
     card_number = models.CharField(max_length=16, validators=[MinLengthValidator(16)])
     expire_date = models.DateField(help_text="Expiration date in the format YYYY-MM-DD")
     cvc = models.IntegerField(validators=[MinValueValidator(100), MaxValueValidator(9999)])

@@ -1,0 +1,170 @@
+@font-face {
+	font-family: "Gilroy-ExtraBold";
+	src: url("../../fonts/Gilroy-ExtraBold.ttf");
+}
+
+@font-face {
+	font-family: "Gilroy-Light";
+	src: url("../../fonts/Gilroy-Light.ttf");
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.hero-section {
+	position: relative;
+	background-image: url("../../images/account/AuthBg.png"); /* Coloca tu imagen de tortas aquí */
+    background-repeat: no-repeat;
+    background-size: cover; /* Esto hará que cubra todo el fondo */
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+	padding-right: 50px;
+}
+
+.left-image img {
+    position: absolute;
+    left: -30%;
+    top: 80px;
+    width: 80%;
+    height: 80%;
+    filter: blur(5px);
+    z-index:3;
+    opacity: 0.9;
+}
+
+.form {
+    position: relative;
+    z-index: 5;
+    width: 600px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    padding: 50px;
+    margin-right: -10px;
+    overflow: hidden;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.main-img img {
+    width: 600px;
+    height: 600px;
+    object-fit: contain;
+}
+
+.form h6 {
+    position: absolute;
+    top: 60px;
+    right: 100px; /* Adjust the position to the right */
+}
+
+.form h2 {
+	font-family: "Gilroy-ExtraBold";
+	font-weight: 800;
+	font-size: 45px;
+	color: #800886;
+	padding: 10px 0px 15px;
+}
+
+.form label {
+	font-family: "Gilroy-ExtraBold";
+	font-weight: 800;
+	font-size: 18px;
+	color: #800886;
+}
+
+.form input {
+	font-family: "Gilroy-ExtraBold";
+	font-weight: 800;
+	font-size: 15px;
+	width: 100%;
+	padding: 20px;
+	border: none;
+	margin: 10px 0px 25px;
+}
+
+.form p {
+	font-family: "Gilroy-ExtraBold";
+	font-weight: 800;
+	font-size: 18px;
+	color: #a017bc;
+}
+
+.submit {
+	font-family: "Gilroy-ExtraBold";
+	font-weight: 800;
+	font-size: 18px;
+	color: #fff;
+	width: 100%;
+	padding: 20px;
+	border: none;
+	margin: 20px 0px;
+	background-color: #ad19f2;
+	cursor: pointer;
+}
+
+.form h5 {
+	font-family: "Gilroy-ExtraBold";
+	font-weight: 800;
+	font-size: 18px;
+	color: #2a1e17;
+	text-align: center;
+}
+
+.icon-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+	margin: 17px 0px;
+}
+
+.icon {
+	background-color: #fff;
+	padding: 10px 40px;
+	border-radius: 20px;
+}
+
+.form h3 {
+	font-family: "Gilroy-ExtraBold";
+	font-weight: 800;
+	font-size: 18px;
+	color: #2a1e17;
+	text-align: center;
+}
+
+.form span {
+	font-family: "Gilroy-ExtraBold";
+	font-weight: 400;
+	font-size: 20px;
+	color: #9f19f2;
+}
+
+.login-link {
+	text-decoration: underline;
+	color: #c838b7;
+	font-weight: bold;
+}
+
+.login-link:hover {
+	color: #8d1cbe;
+}
+
+.logo {
+	width: 150px;
+	height: auto;
+}
+
+@media (max-width: 768px) {
+	.logo {
+		width: 100px;
+	}
+}
