@@ -1,6 +1,7 @@
 from datetime import datetime
 from django.shortcuts import render
 from django.core.cache import cache
+import requests
 
 # Create your views here.
 def home_view(request):
@@ -42,4 +43,18 @@ def home_view(request):
     visit_count += 1  # Incrementar el contador
     cache.set('visit_count', visit_count, timeout=None)
 
-    return render(request, "home.html", {"greet": greet, "quote": quote, "visit_count": visit_count})
+    #API para saber el clima de medellín
+
+    city = 'Medellin'
+
+    ApiKey = '9d0c4174e8fb1086e926aceb76b4deca'
+    URL = 'https://api.openweathermap.org/data/2.5/weather'
+    Params ={'q':city,'appid': ApiKey, 'units':'metric'}
+    r = requests.get(url=URL, params=Params)
+    res = r.json() 
+    icon = res['weather'][0]['icon']
+    temp = res['main']['temp']
+    humidity = res['main']['humidity']
+    country = res['sys']['country']
+
+    return render(request, "home.html", {"greet": greet, "quote": quote, "visit_count": visit_count,'icon': icon,'temp': temp,'country': country,'city':city})

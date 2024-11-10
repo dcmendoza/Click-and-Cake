@@ -581,3 +581,18 @@ header.active {
 .scroll-to-top-btn:hover {
     background-color: #d13d0c; /* Efecto hover */
 }
+
+.content-wrapper {
+    display: grid;                /* Establece el uso de CSS Grid */
+    grid-template-columns: 1fr auto; /* Crea dos columnas: la primera toma el espacio disponible y la segunda es de tamaño automático */
+    align-items: center;           /* Alinea los elementos verticalmente en el centro */
+    width: 100%;                   /* Asegura que el contenedor ocupe todo el ancho */
+}
+
+.left-content {
+    text-align: left;              /* Alinea el contenido a la izquierda */
+}
+
+.right-content {
+    text-align: right;             /* Alinea el contenido a la derecha */
+}
