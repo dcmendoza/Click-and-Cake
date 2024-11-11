@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% load static %} 
+
+{% block title %}Menu{% endblock title %}
+
+{% block styles %}
+<link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+<link rel="stylesheet" href="{% static 'css/home/home.css' %}"/>
+{% endblock styles %} 
+
+{% block content %}
+
+
+<!-- MENU SECTION -->
+<div class="section">
+	<div class="container">
+		<div class="section__header">
+			Menu
+		</div>
+		<div class="section__content">
+			<div class="product-grid">
+				<!-- single product -->
+				<div class="product-card">
+					<div class="product-card__img">
+						<img src="{% static 'images/home/cupcake_(1).png' %}" alt="">
+						<div class="btn-wraper">
+							<button class="btn btn-small">Add to bag</button>
+						</div>
+					</div>
+					<div class="product-card__price">$5.65</div>
+					<div class="product-card__name">Blueberry cake</div>
+				</div>
+				<!-- end single product -->
+				<!-- single product -->
+				<div class="product-card">
+					<div class="product-card__img">
+						<img src="{% static 'images/home/cupcake_(2).png' %}" alt="">
+						<div class="btn-wraper">
+							<button class="btn btn-small">Add to bag</button>
+						</div>
+					</div>
+					<div class="product-card__price">$5.65</div>
+					<div class="product-card__name">Strawberry cake</div>
+				</div>
+				<!-- end single product -->
+				<!-- single product -->
+				<div class="product-card">
+					<div class="product-card__img">
+						<img src="{% static 'images/home/cupcake_(3).png' %}" alt="">
+						<div class="btn-wraper">
+							<button class="btn btn-small">Add to bag</button>
+						</div>
+					</div>
+					<div class="product-card__price">$5.65</div>
+					<div class="product-card__name">Chocolate cake</div>
+				</div>
+				<!-- end single product -->
+				<!-- single product -->
+				<div class="product-card">
+					<div class="product-card__img">
+						<img src="{% static 'images/home/cupcake_(5).png' %}" alt="">
+						<div class="btn-wraper">
+							<button class="btn btn-small">Add to bag</button>
+						</div>
+					</div>
+					<div class="product-card__price">$5.65</div>
+					<div class="product-card__name">Caramel cake</div>
+				</div>
+				<!-- end single product -->
+				<!-- single product -->
+				<div class="product-card">
+					<div class="product-card__img">
+						<img src="{% static 'images/home/cupcake_(6).png' %}" alt="">
+						<div class="btn-wraper">
+							<button class="btn btn-small">Add to bag</button>
+						</div>
+					</div>
+					<div class="product-card__price">$5.65</div>
+					<div class="product-card__name">Cheese cake</div>
+				</div>
+				<!-- end single product -->
+				<!-- single product -->
+				<div class="product-card">
+					<div class="product-card__img">
+						<img src="{% static 'images/home/cupcake_(7).png' %}" alt="">
+						<div class="btn-wraper">
+							<button class="btn btn-small">Add to bag</button>
+						</div>
+					</div>
+					<div class="product-card__price">$5.65</div>
+					<div class="product-card__name">Chocolateake</div>
+				</div>
+				<!-- end single product -->
+				<!-- single product -->
+				<div class="product-card">
+					<div class="product-card__img">
+						<img src="{% static 'images/home/cupcake_(11).png' %}" alt="">
+						<div class="btn-wraper">
+							<button class="btn btn-small">Add to bag</button>
+						</div>
+					</div>
+					<div class="product-card__price">$5.65</div>
+					<div class="product-card__name">Milk cake</div>
+				</div>
+				<!-- end single product -->
+				<!-- single product -->
+				<div class="product-card">
+					<div class="product-card__img">
+						<img src="{% static 'images/home/cupcake_(9).png' %}" alt="">
+						<div class="btn-wraper">
+							<button class="btn btn-small">Add to bag</button>
+						</div>
+					</div>
+					<div class="product-card__price">$5.65</div>
+					<div class="product-card__name">Chocolate cake</div>
+				</div>
+				<!-- end single product -->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END MENU SECTION -->
+
+{% endblock content %}
+
+{% block scripts %}
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+<script src="{% static 'js/home/home.js' %}"></script>
+{% endblock scripts %}
