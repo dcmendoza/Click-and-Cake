@@ -58,3 +58,6 @@ def home_view(request):
     country = res['sys']['country']
 
     return render(request, "home.html", {"greet": greet, "quote": quote, "visit_count": visit_count,'icon': icon,'temp': temp,'country': country,'city':city})
+
+def menu_view(request):
+    return render(request, "menu.html")
