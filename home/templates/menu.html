@@ -121,7 +121,15 @@
 	</div>
 </div>
 <!-- END MENU SECTION -->
+<!-- DOWNLOAD COPIES OF THE PRODUCTS-->
+<div class="download">
+	<ul>
+		<li><a href="{% url 'generate_report' 'excel' %}">Descargar reporte en Excel</a></li>
+		<li><a href="{% url 'generate_report' 'pdf' %}">Descargar reporte en PDF</a></li>
+	</ul>
+</div>
 
+<!-- END DOWNLOAD SECTION -->
 {% endblock content %}
 
 {% block scripts %}

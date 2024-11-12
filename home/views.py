@@ -2,6 +2,12 @@ from datetime import datetime
 from django.shortcuts import render
 from django.core.cache import cache
 import requests
+from django.http import HttpResponse
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+from cake.models import Cake
+from .report_generator import ExcelReportGenerator, PDFReportGenerator
+
 
 # Create your views here.
 def home_view(request):
@@ -61,3 +67,28 @@ def home_view(request):
 
 def menu_view(request):
     return render(request, "menu.html")
+
+
+def generate_report(request, report_type):
+    # Obtener todos los productos
+    products = Cake.objects.all()
+    
+    if report_type == 'excel':
+        report_generator = ExcelReportGenerator()
+    elif report_type == 'pdf':
+        report_generator = PDFReportGenerator()
+    else:
+        return HttpResponse("Tipo de reporte no soportado.", status=400)
+    
+    # Generar el reporte
+    report = report_generator.generate_report(products)
+    
+    # Preparar la respuesta para la descarga
+    if report_type == 'excel':
+        response = HttpResponse(report, content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = 'attachment; filename=productos.xlsx'
+    elif report_type == 'pdf':
+        response = HttpResponse(report, content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename=productos.pdf'
+    
+    return response

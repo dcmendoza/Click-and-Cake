@@ -596,3 +596,8 @@ header.active {
 .right-content {
     text-align: right;             /* Alinea el contenido a la derecha */
 }
+
+.download {
+	background-color:#f54749;
+	text-align: right;
+}
