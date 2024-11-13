@@ -17,4 +17,4 @@ COPY . /app
 EXPOSE 80
 
 # Comando para iniciar el servidor de desarrollo de Django en el puerto 80
-CMD ["sudo", "python", "manage.py", "runserver"]
+CMD ["python", "manage.py", "runserver"]
