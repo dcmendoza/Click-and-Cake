@@ -1,0 +1,19 @@
+<div class="form-container">
+    <h2 class="form-title">Crear Nuevo {{ model_name|title }}</h2>
+    <form method="post" enctype="multipart/form-data" class="dashboard-form" onsubmit="event.preventDefault(); submitForm('{{ model_name }}');">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group">
+            <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}
+            <small class="form-help">{{ field.help_text }}</small>
+            {% endif %}
+        </div>
+        {% endfor %}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Crear</button>
+            <button type="button" class="btn btn-secondary" onclick="loadModelList('{{ model_name }}')">Volver</button>
+        </div>
+    </form>
+</div>

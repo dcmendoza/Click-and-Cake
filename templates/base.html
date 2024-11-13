@@ -37,12 +37,13 @@
 					<li class="active"><a href="{% url 'home' %}">Home</a></li>
 					<li><a href="{% url 'menu' %}">Menu</a></li>
 					<li><a href="{% url 'home' %}#about">About</a></li>
-					<li><a href="#">Order</a></li>
+					<li><a href="{% url 'cake_list' %}">API</a></li>
 					{% if user.is_authenticated %}
 						{% if user.is_staff %}
-							<li><a href="{% url 'admin:index' %}">Admin</a></li>
+							<li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+							<li><a href="{% url 'cart' %}">Cart</a></li>
 						{% else %}
-							<li><a href="#">Account</a></li>
+							<li><a href="{% url 'cart' %}">Cart</a></li>
 						{% endif %}
 						<li><a href="{% url 'logout' %}">Logout</a></li>
 					{% else %}
@@ -66,7 +67,7 @@
 				{% endif %}
 			<!-- El contenido de cada plantilla hija irá aquí -->
 			{% endblock content %}
-		
+
 		<!-- Footer -->
 		<footer>
 			<div class="section section__footer">
@@ -104,13 +105,16 @@
 
 		<!-- Mobile Overlay -->
 		<div class="mobile-overlay"></div>
-		<button id="scrollToTop" class="scroll-to-top-btn" title="Go to top">⬆️</button>
+		<button id="scrollTopBtn" class="scroll-to-top-btn" aria-label="Volver arriba">
+			<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<path d="M12 19V5M5 12l7-7 7 7"/>
+			</svg>
+		</button>
 		<!-- Scripts -->
 		{% block scripts %}
 		<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 		<script src="{% static 'js/home/home.js' %}"></script>
 		{% endblock scripts %}
-		
 	</body>
 	<!-- End body -->
 </html>

@@ -1,18 +1,19 @@
+import json
 from datetime import datetime
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
+from account.models import Cart
 from django.shortcuts import render
 from django.core.cache import cache
 import requests
 from django.http import HttpResponse
-from reportlab.lib.pagesizes import letter
-from reportlab.pdfgen import canvas
 from cake.models import Cake
 from .report_generator import ExcelReportGenerator, PDFReportGenerator
-
 
 # Create your views here.
 def home_view(request):
     date = datetime.now()
-    greet = "Hello"
     user = request.user
 
     # Verificar si el usuario está autenticado y tiene un primer nombre
@@ -53,21 +54,20 @@ def home_view(request):
 
     city = 'Medellin'
 
-    ApiKey = '9d0c4174e8fb1086e926aceb76b4deca'
+    apikey = '9d0c4174e8fb1086e926aceb76b4deca'
     URL = 'https://api.openweathermap.org/data/2.5/weather'
-    Params ={'q':city,'appid': ApiKey, 'units':'metric'}
-    r = requests.get(url=URL, params=Params)
+    params ={'q':city,'appid': apikey, 'units':'metric'}
+    r = requests.get(url=URL, params=params)
     res = r.json() 
     icon = res['weather'][0]['icon']
     temp = res['main']['temp']
-    humidity = res['main']['humidity']
     country = res['sys']['country']
 
     return render(request, "home.html", {"greet": greet, "quote": quote, "visit_count": visit_count,'icon': icon,'temp': temp,'country': country,'city':city})
 
 def menu_view(request):
-    return render(request, "menu.html")
-
+    cakes = Cake.objects.all()  # Obtenemos todos los objetos Cake de la base de datos
+    return render(request, 'menu.html', {'cakes': cakes})
 
 def generate_report(request, report_type):
     # Obtener todos los productos
@@ -90,5 +90,30 @@ def generate_report(request, report_type):
     elif report_type == 'pdf':
         response = HttpResponse(report, content_type='application/pdf')
         response['Content-Disposition'] = 'attachment; filename=productos.pdf'
-    
     return response
+
+@require_POST
+@login_required  # Asegúrate de que el usuario esté autenticado
+def add_to_cart(request):
+    try:
+        data = json.loads(request.body)  # Decodifica el JSON del cuerpo de la solicitud
+        cake_id = data.get('cake_id')  # Obtén el `cake_id` del JSON
+        quantity = data.get('quantity', 1)  # Obtén la cantidad, predeterminada a 1
+        print("Cake ID:", cake_id)  # Para verificar si se está recibiendo correctamente
+
+        # Verificar que el pastel existe
+        try:
+            cake = Cake.objects.get(id=cake_id)
+        except Cake.DoesNotExist:
+            return JsonResponse({'success': False, 'message': 'Cake not found.'}, status=404)
+
+        # Obtener o crear el carrito asociado al usuario
+        cart, created = Cart.objects.get_or_create(user=request.user)
+
+        # Agregar el pastel al carrito
+        cart.add_cake(cake_id, quantity)
+
+        return JsonResponse({'success': True, 'message': 'Cake added to cart successfully.'})
+    
+    except json.JSONDecodeError:
+        return JsonResponse({'success': False, 'message': 'Invalid JSON format.'}, status=400)

@@ -47,15 +47,14 @@ window.addEventListener('scroll', () => {
     }
 })
 
-window.onscroll = function() {
-    var scrollBtn = document.getElementById("scrollToTop");
-    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-        scrollBtn.style.display = "block";
-    } else {
-        scrollBtn.style.display = "none";
-    }
-};
-
-document.getElementById('scrollToTop').addEventListener('click', function() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+document.addEventListener('DOMContentLoaded', function() {
+    const scrollBtn = document.getElementById('scrollTopBtn');
+    
+    scrollBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
 });

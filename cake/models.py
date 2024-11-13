@@ -55,7 +55,7 @@ class Cake(models.Model):
     flavor = models.CharField(max_length=20, choices=FLAVOR_CHOICES, default='vanilla')  # Sabor principal del pastel
     cream_flavor = models.CharField(max_length=20, choices=CREAM_FLAVOR_CHOICES, default='vanilla')  # Sabor de la crema
     shape = models.CharField(max_length=10, choices=SHAPE_CHOICES, default='round')  # Forma del pastel
-    toppings = models.JSONField(default=list)  # Toppings seleccionables
+    toppings = models.CharField(max_length=30, choices=TOPPING_CHOICES, default='sprinkles')  # Toppings seleccionables
     description = models.TextField(blank=True)  # Descripción del pastel
     picture = models.ImageField(upload_to='img/cake/', blank=True, null=True)  # Imagen del pastel
 

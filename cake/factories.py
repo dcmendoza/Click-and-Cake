@@ -1,4 +1,3 @@
-# cakes/factories.py
 import factory
 from faker import Faker
 from .models import Cake
@@ -18,4 +17,3 @@ class CakeFactory(factory.django.DjangoModelFactory):
     toppings = factory.LazyAttribute(lambda _: [fake.word() for _ in range(fake.random_int(min=1, max=5))])  # Toppings aleatorios
     description = factory.LazyAttribute(lambda _: fake.sentence())  # Descripción aleatoria
     picture = None  # Deja este campo vacío o asigna una imagen si es necesario
-

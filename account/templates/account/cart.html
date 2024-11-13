@@ -1,0 +1,192 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Your Magical Cake Cart{% endblock title %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/account/cart.css' %}"/>
+<link rel="stylesheet" href="{% static 'css/home/home.css' %}"/>
+{% endblock styles %}
+
+{% block content %}
+<section class="cart-section">
+    <div class="cart-container">
+        <h1 class="cart-title">Your Magical Cake Cart</h1>
+        
+        {% if items %}
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Cake</th>
+                        <th>Quantity</th>
+                        <th>Price per Unit</th>
+                        <th>Total Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr data-cake-id="{{ item.cake.id }}">
+                        <td>{{ item.cake.name }}</td>
+                        <td>
+                            <input type="number" min="1" value="{{ item.quantity }}" class="quantity-input">
+                            <button class="update-btn">Update</button>
+                        </td>
+                        <td>${{ item.cake.price }}</td>
+                        <td>${{ item.total_price }}</td>
+                        <td>
+                            <button class="remove-btn">Remove</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="cart-total">Total: $<span id="cart-total-price">{{ total_price }}</span></div>
+        {% else %}
+            <p class="cart-empty">Your cart is as empty as a cake display after a birthday party! 🎂 Time to add some sweetness!</p>
+        {% endif %}
+
+        <a href="{% url 'home' %}" class="btn-continue-shopping">Continue Shopping</a>
+    </div>
+</section>
+
+<div id="cart-urls" 
+    data-update-url="{% url 'update_cart_item' %}" 
+    data-remove-url="{% url 'remove_from_cart' %}" 
+    style="display: none;">
+</div>
+
+<div class="loading-overlay">
+    <div class="loading-spinner"></div>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+<script>
+const updateCartItemUrl = "{{ update_cart_item_url }}";
+const removeFromCartUrl = "{{ remove_from_cart_url }}";
+
+// shrink header when scroll
+const header = document.querySelector('header');
+window.addEventListener('scroll', () => {
+    if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+        header.classList.add('shrink');
+    } else {
+        header.classList.remove('shrink');
+    }
+})
+
+document.addEventListener('DOMContentLoaded', function() {
+    const scrollBtn = document.getElementById('scrollTopBtn');
+    
+    scrollBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const loadingOverlay = document.querySelector('.loading-overlay');
+    const cartTotalElement = document.getElementById('cart-total-price');
+
+    // Obtener las URLs de actualización y eliminación del div oculto
+    const updateCartItemUrl = document.getElementById('cart-urls').getAttribute('data-update-url');
+    const removeFromCartUrl = document.getElementById('cart-urls').getAttribute('data-remove-url');
+
+    function showLoading() {
+        loadingOverlay.classList.add('active');
+    }
+
+    function hideLoading() {
+        loadingOverlay.classList.remove('active');
+    }
+
+    function updateCartTotal() {
+        let total = 0;
+        document.querySelectorAll('.cart-table tr[data-cake-id]').forEach(row => {
+            const price = parseFloat(row.children[3].textContent.replace('$', ''));
+            total += price;
+        });
+        cartTotalElement.textContent = total.toFixed(2);
+    }
+
+    // Actualizar cantidad en el carrito
+    document.querySelectorAll('.update-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const row = this.closest('tr');
+            const cakeId = row.getAttribute('data-cake-id');
+            const quantity = row.querySelector('.quantity-input').value;
+
+            showLoading();
+
+            fetch(updateCartItemUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({ cake_id: cakeId, quantity: quantity })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    row.children[3].textContent = '$' + data.new_total_price;
+                    updateCartTotal();
+                    row.style.backgroundColor = '#e6ffe6';
+                    setTimeout(() => {
+                        row.style.backgroundColor = '';
+                    }, 1000);
+                } else {
+                    alert(data.message);
+                }
+            })
+            .finally(() => {
+                hideLoading();
+            });
+        });
+    });
+
+    // Eliminar artículo del carrito
+    document.querySelectorAll('.remove-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const row = this.closest('tr');
+            const cakeId = row.getAttribute('data-cake-id');
+
+            showLoading();
+
+            fetch(removeFromCartUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({ cake_id: cakeId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    row.style.transform = 'translateX(100%)';
+                    row.style.opacity = '0';
+                    setTimeout(() => {
+                        row.remove();
+                        updateCartTotal();
+                        if (document.querySelectorAll('.cart-table tr[data-cake-id]').length === 0) {
+                            location.reload();
+                        }
+                    }, 300);
+                } else {
+                    alert(data.message);
+                }
+            })
+            .finally(() => {
+                hideLoading();
+            });
+        });
+    });
+});
+</script>
+{% endblock scripts %}

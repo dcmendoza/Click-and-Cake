@@ -28,7 +28,7 @@ class ExcelReportGenerator(ReportGenerator):
 class PDFReportGenerator(ReportGenerator):
     def generate_report(self, data):
         response = BytesIO()
-        p = canvas.Canvas(response, pagesize=landscape)
+        p = canvas.Canvas(response, pagesize=letter)
         y_position = 750
         
         p.drawString(100, y_position, "Reporte de Productos")

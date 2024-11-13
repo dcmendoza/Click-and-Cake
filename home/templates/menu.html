@@ -5,13 +5,10 @@
 {% block title %}Menu{% endblock title %}
 
 {% block styles %}
-<link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 <link rel="stylesheet" href="{% static 'css/home/home.css' %}"/>
 {% endblock styles %} 
 
 {% block content %}
-
-
 <!-- MENU SECTION -->
 <div class="section">
 	<div class="container">
@@ -21,100 +18,19 @@
 		<div class="section__content">
 			<div class="product-grid">
 				<!-- single product -->
-				<div class="product-card">
-					<div class="product-card__img">
-						<img src="{% static 'images/home/cupcake_(1).png' %}" alt="">
-						<div class="btn-wraper">
-							<button class="btn btn-small">Add to bag</button>
+				{% for cake in cakes %}
+					<div class="product-card">
+						<div class="product-card__img">
+							<a href="{% url 'cake_detail' cake.id %}">
+								<img src="{{ cake.picture.url }}" alt="{{ cake.name }}">
+							</a>
+							<div class="btn-wraper">
+								<button class="btn btn-small" data-cake-id="{{ cake.id }}" data-url="{% url 'add_to_cart' %}">Add to bag</button>							</div>
 						</div>
+						<div class="product-card__price">${{ cake.price }}</div>
+						<div class="product-card__name">{{ cake.name }}</div>
 					</div>
-					<div class="product-card__price">$5.65</div>
-					<div class="product-card__name">Blueberry cake</div>
-				</div>
-				<!-- end single product -->
-				<!-- single product -->
-				<div class="product-card">
-					<div class="product-card__img">
-						<img src="{% static 'images/home/cupcake_(2).png' %}" alt="">
-						<div class="btn-wraper">
-							<button class="btn btn-small">Add to bag</button>
-						</div>
-					</div>
-					<div class="product-card__price">$5.65</div>
-					<div class="product-card__name">Strawberry cake</div>
-				</div>
-				<!-- end single product -->
-				<!-- single product -->
-				<div class="product-card">
-					<div class="product-card__img">
-						<img src="{% static 'images/home/cupcake_(3).png' %}" alt="">
-						<div class="btn-wraper">
-							<button class="btn btn-small">Add to bag</button>
-						</div>
-					</div>
-					<div class="product-card__price">$5.65</div>
-					<div class="product-card__name">Chocolate cake</div>
-				</div>
-				<!-- end single product -->
-				<!-- single product -->
-				<div class="product-card">
-					<div class="product-card__img">
-						<img src="{% static 'images/home/cupcake_(5).png' %}" alt="">
-						<div class="btn-wraper">
-							<button class="btn btn-small">Add to bag</button>
-						</div>
-					</div>
-					<div class="product-card__price">$5.65</div>
-					<div class="product-card__name">Caramel cake</div>
-				</div>
-				<!-- end single product -->
-				<!-- single product -->
-				<div class="product-card">
-					<div class="product-card__img">
-						<img src="{% static 'images/home/cupcake_(6).png' %}" alt="">
-						<div class="btn-wraper">
-							<button class="btn btn-small">Add to bag</button>
-						</div>
-					</div>
-					<div class="product-card__price">$5.65</div>
-					<div class="product-card__name">Cheese cake</div>
-				</div>
-				<!-- end single product -->
-				<!-- single product -->
-				<div class="product-card">
-					<div class="product-card__img">
-						<img src="{% static 'images/home/cupcake_(7).png' %}" alt="">
-						<div class="btn-wraper">
-							<button class="btn btn-small">Add to bag</button>
-						</div>
-					</div>
-					<div class="product-card__price">$5.65</div>
-					<div class="product-card__name">Chocolateake</div>
-				</div>
-				<!-- end single product -->
-				<!-- single product -->
-				<div class="product-card">
-					<div class="product-card__img">
-						<img src="{% static 'images/home/cupcake_(11).png' %}" alt="">
-						<div class="btn-wraper">
-							<button class="btn btn-small">Add to bag</button>
-						</div>
-					</div>
-					<div class="product-card__price">$5.65</div>
-					<div class="product-card__name">Milk cake</div>
-				</div>
-				<!-- end single product -->
-				<!-- single product -->
-				<div class="product-card">
-					<div class="product-card__img">
-						<img src="{% static 'images/home/cupcake_(9).png' %}" alt="">
-						<div class="btn-wraper">
-							<button class="btn btn-small">Add to bag</button>
-						</div>
-					</div>
-					<div class="product-card__price">$5.65</div>
-					<div class="product-card__name">Chocolate cake</div>
-				</div>
+				{% endfor %}
 				<!-- end single product -->
 			</div>
 		</div>
@@ -122,17 +38,34 @@
 </div>
 <!-- END MENU SECTION -->
 <!-- DOWNLOAD COPIES OF THE PRODUCTS-->
-<div class="download">
-	<ul>
-		<li><a href="{% url 'generate_report' 'excel' %}">Descargar reporte en Excel</a></li>
-		<li><a href="{% url 'generate_report' 'pdf' %}">Descargar reporte en PDF</a></li>
-	</ul>
+<div class="download-section">
+	<h3 class="download-title">Descargar Reportes</h3>
+	<div class="download-buttons">
+		<a href="{% url 'generate_report' 'excel' %}" class="btn btn-download btn-excel">
+		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+			<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+			<polyline points="14 2 14 8 20 8"></polyline>
+			<line x1="16" y1="13" x2="8" y2="13"></line>
+			<line x1="16" y1="17" x2="8" y2="17"></line>
+			<polyline points="10 9 9 9 8 9"></polyline>
+		</svg>
+		Descargar en Excel
+		</a>
+		<a href="{% url 'generate_report' 'pdf' %}" class="btn btn-download btn-pdf">
+		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+			<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+			<polyline points="14 2 14 8 20 8"></polyline>
+			<line x1="16" y1="13" x2="8" y2="13"></line>
+			<line x1="16" y1="17" x2="8" y2="17"></line>
+			<polyline points="10 9 9 9 8 9"></polyline>
+		</svg>
+		Descargar en PDF
+		</a>
+	</div>
 </div>
-
 <!-- END DOWNLOAD SECTION -->
 {% endblock content %}
 
 {% block scripts %}
-<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
-<script src="{% static 'js/home/home.js' %}"></script>
+<script src="{% static 'js/home/menu.js' %}"></script>
 {% endblock scripts %}

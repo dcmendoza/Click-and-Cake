@@ -1,0 +1,23 @@
+<div class="form-container">
+    <h2 class="form-title">Detalle de {{ model_name|title }}</h2>
+    {% if form %}
+    <form method="post" enctype="multipart/form-data" class="dashboard-form">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group">
+            <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}
+            <small class="form-help">{{ field.help_text }}</small>
+            {% endif %}
+        </div>
+        {% endfor %}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            <a href="javascript:void(0);" onclick="loadModelList('{{ model_name }}')" class="btn btn-secondary">Volver</a>
+        </div>
+    </form>
+    {% else %}
+    <p class="no-data">No hay información disponible para editar.</p>
+    {% endif %}
+</div>

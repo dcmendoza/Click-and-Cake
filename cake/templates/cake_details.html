@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}{{ cake.name }} - Menu{% endblock title %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/cake/cake.css' %}"/>
+<link rel="stylesheet" href="{% static 'css/home/home.css' %}"/>
+{% endblock styles %}
+
+{% block content %}
+<div class="cake-detail">
+  <div class="cake-header">
+    <h1 class="cake-title">{{ cake.name }}</h1>
+    <p class="cake-price">${{ cake.price }}</p>
+  </div>
+  
+  <div class="cake-content">
+    <div class="cake-image">
+      <img src="{{ cake.picture.url }}" alt="{{ cake.name }}">
+    </div>
+    <div class="cake-info">
+      <h2 class="section-title">Description</h2>
+      <p class="cake-description">{{ cake.description }}</p>
+    </div>
+  </div>
+
+  <div class="reviews-section">
+    <h2 class="section-title">Reviews</h2>
+    {% if reviews %}
+      <ul class="reviews-list">
+      {% for review in reviews %}
+        <li class="review-item">
+          <div class="review-header">
+            <strong class="review-author">{{ review.user.username }}</strong>
+            <span class="review-rating">
+              {% for i in "12345" %}
+                {% if forloop.counter <= review.rating %}
+                  <span class="star filled">★</span>
+                {% else %}
+                  <span class="star">☆</span>
+                {% endif %}
+              {% endfor %}
+            </span>
+          </div>
+          <p class="review-comment">{{ review.comment }}</p>
+          <p class="review-date">Posted on {{ review.date|date:"F j, Y" }}</p>
+        </li>
+      {% endfor %}
+      </ul>
+    {% else %}
+      <p class="no-reviews">No reviews yet for this cake.</p>
+    {% endif %}
+  </div>
+
+  <div class="review-form-section">
+    <h3 class="section-title">Leave a Review</h3>
+    {% if user.is_authenticated %}
+      <form method="post" class="review-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Submit Review</button>
+      </form>
+    {% else %}
+      <p class="login-prompt">Please <a href="{% url 'login' %}">log in</a> to leave a review.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'js/cake/cake.js' %}"></script>
+{% endblock scripts %}

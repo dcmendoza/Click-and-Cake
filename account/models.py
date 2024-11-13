@@ -7,8 +7,8 @@ class Cart(models.Model):
     Model representing a shopping cart.
     """
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='cart', null=True, blank=True)  # Relación con el usuario
-    cake_quantities = models.JSONField(default=dict)  # Diccionario que guarda {cake_id: cantidad}
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='cart')  # Relación con el usuario
+    cake_quantities = models.JSONField(default=dict, blank=True)  # Diccionario que guarda {cake_id: cantidad}
 
     def add_cake(self, cake_id, quantity=1):
         """

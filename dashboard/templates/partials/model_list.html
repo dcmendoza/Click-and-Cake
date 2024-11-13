@@ -1,0 +1,39 @@
+<div class="model-list-container">
+    <div class="list-header">
+        <h2 class="list-title">Lista de {{ model_name|title }}</h2>
+        <button onclick="loadModelDetail('{{ model_name }}')" class="btn btn-primary">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            Crear Nuevo {{ model_name|title }}
+        </button>
+    </div>
+
+    {% if objects %}
+    <div class="cards-grid">
+        {% for obj in objects %}
+        <div class="card" onclick="loadModelDetail('{{ model_name }}', {{ obj.id }})">
+            {% if obj.picture %}
+            <div class="card-image">
+                <img src="{{ obj.picture.url }}" alt="{{ obj }}">
+            </div>
+            {% endif %}
+            <div class="card-content">
+                <h3 class="card-title">{{ obj }}</h3>
+                {% if obj.description %}
+                <p class="card-description">{{ obj.description|truncatechars:100 }}</p>
+                {% endif %}
+                {% if obj.price %}
+                <p class="card-price">${{ obj.price }}</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="no-data">
+        <p>No hay {{ model_name }} disponibles.</p>
+    </div>
+    {% endif %}
+</div>

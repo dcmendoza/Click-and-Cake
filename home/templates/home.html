@@ -81,15 +81,24 @@
 	</div>
 </div>
 <!-- END HERO SLIDER -->
-<div class="content-wrapper">
-    <div class="left-content">
-        <h1>{{ greet }} </h1>
-		<h1>{{ quote }}</h1>
-        <p>This page has been visited {{ visit_count }} times.</p>
-    </div>
-    <div class="right-content">
-        <img src="http://openweathermap.org/img/w/{{icon}}.png" width="50px" />
-        <p>In {{city}} ({{country}}), it is currently {{temp}}°C</p>
+<div class="content-wrapper section">
+    <div class="container">
+        <div class="content-grid">
+            <div class="content-grid__left">
+                <h1 class="greeting-title">{{ greet }}</h1>
+                <h2 class="greeting-quote">{{ quote }}</h2>
+                <p class="visit-counter">This page has been visited <span class="counter-number">{{ visit_count }}</span> times.</p>
+            </div>
+            <div class="content-grid__right">
+                <div class="weather-card">
+                    <img src="http://openweathermap.org/img/w/{{icon}}.png" alt="Weather icon" class="weather-icon" />
+                    <div class="weather-info">
+                        <span class="weather-location">In {{city}} ({{country}})</span>
+                        <span class="weather-temp">{{temp}}°C</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <!-- HOT SELLING SECTION -->
@@ -216,9 +225,7 @@
 				<p class="about__info__description">
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
 					dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-					ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-					nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-					anim id est laborum
+					ea commodo consequat.
 				</p>
 				<div class="about__info__btn">
 					<button class="btn btn-left">Read more</button>
